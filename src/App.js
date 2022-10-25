@@ -10,6 +10,8 @@ import Sidebar from './components/Sidebar'
 import Bom from './pages/BOM/Bom'
 import Mrp from './pages/MRP/Mrp'
 import Inventories from './pages/Inventories/Inventories'
+import OnlineUsers from './components/OnlineUsers'
+
 
 function App() {
 
@@ -48,6 +50,7 @@ function App() {
             </Switch>
      
           </div>
+          {user && <OnlineUsers />}
       </BrowserRouter>
       )}
       </div>
