@@ -23,7 +23,7 @@ export default function Sidebar() {
             <li>
               <NavLink exact to="/">
                 <img src={DashboardIcon} alt="dashboard icon" />
-                <span>Kezdőoldal</span>
+                <span>Üzenőfal</span>
               </NavLink>
             </li>
             <li>
@@ -38,6 +38,7 @@ export default function Sidebar() {
               <NavLink to="/raktár">
                   <span>Raktárkészlet</span>
               </NavLink>
+
             </li>
           </ul>
         </nav>
