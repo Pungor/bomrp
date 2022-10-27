@@ -6,13 +6,34 @@ import './Chat.css'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 export default function Chat({ project }) {
-  const { user } = useAuthContext()
 
+  const { user } = useAuthContext()
   const [newComment, setNewComment] = useState('')
   const [info , setInfo] = useState([]);
-  
 
 
+ /* const indexing=()=>{
+    let index=0
+    for(var i=0;i<info.length;i++){
+      if(info[i].id===index){
+        index++
+      }
+  }
+  return index
+}*/
+
+  useEffect(()=>{
+    projectFirestore.collection('messages')
+      .get().then((querySnapshot)=>{
+        querySnapshot.forEach(element=>{
+          var data = element.data();
+          setInfo(arr => [...arr , data])
+         
+          })
+        
+      })
+     
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,22 +43,12 @@ export default function Chat({ project }) {
       photoURL: user.photoURL,
       content: newComment,
       createdAt: timestamp.fromDate(new Date()),
-      id: Math.random()
+      id: info.length+1
     })
-    setNewComment('')
-  
-  }
 
-  useEffect(()=>{
-    projectFirestore.collection('messages')
-      .get().then((querySnapshot)=>{
-        querySnapshot.forEach(element=>{
-          var data = element.data();
-          setInfo(arr => [...arr , data])
-          })
-      })
-     
-  }, [])
+    setNewComment('')
+    window.location.reload(false)
+  }
 
 
   return (
@@ -53,12 +64,14 @@ export default function Chat({ project }) {
             </label>
            <button className="btn">Elküld</button>
           </form>
-          <br/>
+        
         </div>
-        <div>
-            <h4>Üzenetek</h4>
+        <div >
+            <br/>
+            <h4>Üzenetek ({info.length})</h4>
             <ul>
               {info.map(info => (
+              
                 <li key={info.id}>
                   <div className="comment-author">
                     <Avatar src={info.photoURL} />

@@ -1,6 +1,6 @@
 .sidebar {
-    width: 300px;
-    min-width: 300px;
+    width: 180px;
+    min-width: 180px;
     background: var(--primary-color);
     min-height: 100vh;
     box-sizing: border-box;
