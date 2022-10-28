@@ -14,6 +14,7 @@ export default function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar-content">
+        
         <div className="user">
           <Avatar src={user.photoURL} />
           <p>Hello {user.displayName}</p>  
@@ -24,6 +25,11 @@ export default function Sidebar() {
               <NavLink exact to="/">
                 <img src={DashboardIcon} alt="dashboard icon" />
                 <span>Üzenőfal</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink exact to="/admin">               
+                <span>Admin</span>
               </NavLink>
             </li>
             <li>

@@ -3,10 +3,11 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext'
 
 import Login from './pages/Login/Login'
-import Signup from './pages/Signup/Signup'
+import Signup from './pages/Admin/Signup'
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import Bom from './pages/BOM/Bom'
+import Admin from './pages/Admin/Admin'
 import Mrp from './pages/MRP/Mrp'
 import Inventories from './pages/Inventories/Inventories'
 import OnlineUsers from './components/OnlineUsers'
@@ -29,14 +30,16 @@ function App() {
                 {!user && <Redirect to="/login" />}
                 {user && <Chat />}
               </Route>
-           
+              <Route exact path="/admin">
+                {!user && <Redirect to="/login" />}
+                {user && <Admin />}
+              </Route>
               <Route path="/login">
                  {user && <Redirect to="/" /> }
                  {!user && <Login /> }
               </Route>
-              <Route path="/signup">
-                 {user && user.displayName && <Redirect to="/" /> }
-                 {!user && <Signup /> }
+              <Route path="/signup">             
+               <Signup /> 
               </Route>
               <Route path="/bom">
                 <Bom />
@@ -54,7 +57,7 @@ function App() {
             </Switch>
      
           </div>
-          {user && <OnlineUsers />}
+         <div className='online'> {user && <OnlineUsers />}</div>
       </BrowserRouter>
       )}
       </div>

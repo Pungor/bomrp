@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useSignup } from '../../hooks/useSignup'
+import { useHistory } from 'react-router-dom'
 
 // styles
 import './Signup.css'
@@ -11,11 +12,12 @@ export default function Signup() {
   const [thumbnail, setThumbnail] = useState(null)
   const [thumbnailError, setThumbnailError] = useState(null)
   const { signup, isPending, error } = useSignup()
+  const history = useHistory()
   
   const handleSubmit = (e) => {
     e.preventDefault()
     signup(email, password, displayName, thumbnail)
-
+    history.push('/')
   }
 
   const handleFileChange = (e) => {

@@ -18,8 +18,8 @@ export default function Navbar() {
         
         {!user && (
          <>
-            <li><Link to="/login">Bejelentkezés</Link></li>
-            <li><Link to="/signup">Regisztráció</Link></li>            
+            <li><Link to="/login"></Link></li>
+                     
          </>
          )}
          {user && (
