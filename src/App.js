@@ -12,6 +12,7 @@ import Mrp from './pages/MRP/Mrp'
 import Inventories from './pages/Inventories/Inventories'
 import OnlineUsers from './components/OnlineUsers'
 import Chat from './pages/Chat/Chat'
+import CreateBom from './pages/Admin/CreateBom'
 
 
 function App() {
@@ -30,9 +31,13 @@ function App() {
                 {!user && <Redirect to="/login" />}
                 {user && <Chat />}
               </Route>
-              <Route exact path="/admin">
+              <Route  path="/admin">
                 {!user && <Redirect to="/login" />}
                 {user && <Admin />}
+              </Route>
+              <Route  path="/createbom">
+                {!user && <Redirect to="/login" />}
+                {user && <CreateBom />}
               </Route>
               <Route path="/login">
                  {user && <Redirect to="/" /> }

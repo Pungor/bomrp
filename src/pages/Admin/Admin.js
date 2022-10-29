@@ -9,7 +9,7 @@ export default function Admin() {
     <div>
      <>
      <p><Link to="/signup">Regisztráció</Link></p> 
-     
+     <p><Link to="/createbom">Bom lista készítése</Link></p> 
      </>
     <p>BOM</p>
     <p>MRP</p>

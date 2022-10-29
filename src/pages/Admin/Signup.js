@@ -17,7 +17,7 @@ export default function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault()
     signup(email, password, displayName, thumbnail)
-    history.push('/')
+    history.push('/admin')
   }
 
   const handleFileChange = (e) => {
