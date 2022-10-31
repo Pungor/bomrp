@@ -10,16 +10,19 @@ export default function CreateBom() {
   const [title, setTitle] = useState('')
   const [method, setMethod] = useState('')
   const [materials, setMaterials] = useState([])
-  
+  const [volumenType, setVolumenType] = useState('')
   const [volumen, setVolumen] = useState('')
   const [newMaterial, setNewMaterial] = useState('')
   
   const { documents, error } = useCollection('bom')
   const { addDocument, response } = useFirestore('bom')
   const history = useHistory()
+
   
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  
+  const handleSubmit = () => {
+   
+   
     addDocument({
         material:materials,
         bomName:title,
@@ -29,32 +32,36 @@ export default function CreateBom() {
     history.push('/admin')
 
   }
+  let text=""
+  const list=()=>{
 
-  const handleAdd = () => {
- 
-   let volumenType=document.getElementById("volumenType").value
+    text=(" " + volumen + " " + volumenType + " " + newMaterial)
+    
+    
+    return text
+  }
 
-  // materials.push({volumen,volumenType,newMaterial })
-   setMaterials(prevMaterials => [...prevMaterials, {volumen,volumenType,  newMaterial}])
+
+  const handleAdd = (e) => {
+    e.preventDefault()
+   
+   materials.push({volumen,volumenType, newMaterial})
+    //list()
     setNewMaterial("")
     setVolumen("")
+    setVolumenType("")
+    
     console.log(materials)
-   /* e.preventDefault()
-    const ing = newIngredient.trim()
 
-    if (ing && !ingredients.includes(ing)) {
-      setIngredients(prevIngredients => [...prevIngredients, newIngredient])
-    }
-    setNewIngredient('')
-    ingredientInput.current.focus()*/
   }
 
   // redirect the user when we get data response
- /* useEffect(() => {
+  /*useEffect(() => {
     if (response) {
       history.push('/')
     }
   }, [response, history])*/
+
 
   return (
     <div className="create">
@@ -83,25 +90,26 @@ export default function CreateBom() {
            </div>
         </label>
         <label>
-            <select  id="volumenType" required >
-                <option selected value="-">-</option>
-                <option value="db">Db</option>
-                <option value="méter">Méter</option>
-            </select>
-           
+          <span>Mértékegység:</span>
+          <input 
+            type="text" 
+            onChange={(e) => setVolumenType(e.target.value)}
+            value={volumenType}
+             
+          />
         </label>
-       
+      
         <label>
           <span>Mennyiség:</span>
           <input 
-            type="number" 
+            type="number" min="0" 
             onChange={(e) => setVolumen(e.target.value)}
             value={volumen}
-            required 
+             
           />
         </label>
         <button onClick={handleAdd} className="btn">Hozzáad</button>
-        <p>Anyaglista: {materials.map(i => <em key={i}>{i}, </em>)}</p>
+        <p>Anyaglista: {list()}</p>
         <label>
           <span>Megjegyzések</span>
           <textarea 
