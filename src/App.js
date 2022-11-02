@@ -7,12 +7,22 @@ import Signup from './pages/Admin/Signup'
 import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar'
 import Bom from './pages/BOM/Bom'
+import Tutorial from './pages/Tutorial/Tutorial'
 import Admin from './pages/Admin/Admin'
-import Mrp from './pages/MRP/Mrp'
 import Inventories from './pages/Inventories/Inventories'
 import OnlineUsers from './components/OnlineUsers'
 import Chat from './pages/Chat/Chat'
 import CreateBom from './pages/Admin/CreateBom'
+import CreateMaterial from './pages/Admin/CreateMaterial'
+import CreateMrp from './pages/Admin/CreateMrp'
+import MaterialIn from './pages/Admin/MaterialIn'
+import MaterialOut from './pages/Admin/MaterialOut'
+import TutorialUpload from './pages/Admin/TutorialUpload'
+import MaterialOrder from './pages/Admin/MaterialOrder'
+import UsedMaterial from './pages/UsedMaterial/UsedMaterial'
+import Riport from './pages/Riport/Riport'
+import Note from './pages/Admin/Note'
+import Collegaue from './pages/Admin/Collegaue'
 
 
 function App() {
@@ -23,7 +33,8 @@ function App() {
     <div className="App">
 
       {authIsReady && ( <BrowserRouter> 
-        {user && <Sidebar />}
+      <div className='sidebar'>  {user && <Sidebar />}</div>
+      
        <div className="container">
         <Navbar/>
             <Switch>
@@ -35,23 +46,67 @@ function App() {
                 {!user && <Redirect to="/login" />}
                 {user && <Admin />}
               </Route>
-              <Route  path="/createbom">
+              <Route  path="/bombeállítás">
                 {!user && <Redirect to="/login" />}
                 {user && <CreateBom />}
               </Route>
-              <Route path="/login">
+              <Route path="/bejelentkezés">
                  {user && <Redirect to="/" /> }
                  {!user && <Login /> }
               </Route>
-              <Route path="/signup">             
+              <Route path="/anyagfelvitel">
+                 {!user && <Redirect to="/" /> }
+                 {user && <CreateMaterial /> }
+              </Route>
+              <Route path="/mrpbeállítás">
+                 {!user && <Redirect to="/" /> }
+                 {user && <CreateMrp /> }
+              </Route>
+              <Route path="/bejövőanyag">
+                 {!user && <Redirect to="/" /> }
+                 {user && <MaterialIn /> }
+              </Route>
+              <Route path="/kimenőanyag">
+                 {!user && <Redirect to="/" /> }
+                 {user && <MaterialOut /> }
+              </Route>              
+              <Route path="/anyagfelhasználás">
+                 {!user && <Redirect to="/" /> }
+                 {user && <UsedMaterial /> }
+              </Route>
+              <Route path="/segédletupload">
+                 {!user && <Redirect to="/" /> }
+                 {user && <TutorialUpload /> }
+              </Route>
+              <Route path="/segédlet">
+                 {!user && <Redirect to="/" /> }
+                 {user && <Tutorial/> }
+              </Route>
+              <Route path="/anyagrendelés">
+                 {!user && <Redirect to="/" /> }
+                 {user && <MaterialOrder/> }
+              </Route>
+              <Route path="/riport">
+                 {!user && <Redirect to="/" /> }
+                 {user && <Riport/> }
+              </Route>
+              <Route path="/napló">
+                 {!user && <Redirect to="/" /> }
+                 {user && <Note/> }
+              </Route>
+              <Route path="/kollégák">
+                 {!user && <Redirect to="/" /> }
+                 {user && <Collegaue/> }
+              </Route>
+              <Route path="/regisztráció">   
+                 {!user && <Redirect to="/" /> }
+                 {user && <Signup /> }          
                <Signup /> 
               </Route>
               <Route path="/bom">
                 <Bom />
               </Route>
-              <Route path="/mrp">
-                <Mrp />
-              </Route>
+
               <Route path="/raktár">
                 <Inventories />
               </Route>

@@ -21,15 +21,16 @@ export default function Sidebar() {
         </div>  
         <nav className="links">
           <ul>
+
+            <li>
+              <NavLink exact to="/admin">               
+                <span>Admin</span>
+              </NavLink>
+            </li>
             <li>
               <NavLink exact to="/">
                 <img src={DashboardIcon} alt="dashboard icon" />
                 <span>Üzenőfal</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink exact to="/admin">               
-                <span>Admin</span>
               </NavLink>
             </li>
             <li>
@@ -38,13 +39,25 @@ export default function Sidebar() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/mrp">
-                  <span>MRP</span>
-              </NavLink>
               <NavLink to="/raktár">
                   <span>Raktárkészlet</span>
-              </NavLink>
-
+              </NavLink>              
+            </li>
+            <li>
+              <NavLink to="/anyagfelhasnálás">
+                  <span>Anyagok felhasználása</span>
+              </NavLink>              
+            </li>
+            
+            <li>
+              <NavLink to="/segédlet">
+                  <span>Segédletek, információk</span>
+              </NavLink>              
+            </li>
+            <li>
+              <NavLink to="/riport">
+                  <span>Kimutatások</span>
+              </NavLink>              
             </li>
           </ul>
         </nav>

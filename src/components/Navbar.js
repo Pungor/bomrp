@@ -18,7 +18,7 @@ export default function Navbar() {
         
         {!user && (
          <>
-            <li><Link to="/login"></Link></li>
+            <li><Link to="/bejelentkezés"></Link></li>
                      
          </>
          )}
