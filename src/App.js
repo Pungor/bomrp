@@ -33,21 +33,21 @@ function App() {
     <div className="App">
 
       {authIsReady && ( <BrowserRouter> 
-      <div className='sidebar'>  {user && <Sidebar />}</div>
+        {user && <Sidebar />}
       
        <div className="container">
         <Navbar/>
             <Switch>
              <Route exact path="/">
-                {!user && <Redirect to="/login" />}
+                {!user && <Redirect to="/bejelentkezés" />}
                 {user && <Chat />}
               </Route>
               <Route  path="/admin">
-                {!user && <Redirect to="/login" />}
+                {!user && <Redirect to="/bejelentkezés" />}
                 {user && <Admin />}
               </Route>
               <Route  path="/bombeállítás">
-                {!user && <Redirect to="/login" />}
+                {!user && <Redirect to="/bejelentkezés" />}
                 {user && <CreateBom />}
               </Route>
               <Route path="/bejelentkezés">
@@ -55,53 +55,53 @@ function App() {
                  {!user && <Login /> }
               </Route>
               <Route path="/anyagfelvitel">
-                 {!user && <Redirect to="/" /> }
+                 {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <CreateMaterial /> }
               </Route>
               <Route path="/mrpbeállítás">
-                 {!user && <Redirect to="/" /> }
+                 {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <CreateMrp /> }
               </Route>
               <Route path="/bejövőanyag">
-                 {!user && <Redirect to="/" /> }
+                 {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <MaterialIn /> }
               </Route>
               <Route path="/kimenőanyag">
-                 {!user && <Redirect to="/" /> }
+                 {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <MaterialOut /> }
               </Route>              
               <Route path="/anyagfelhasználás">
-                 {!user && <Redirect to="/" /> }
+                 {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <UsedMaterial /> }
               </Route>
               <Route path="/segédletupload">
-                 {!user && <Redirect to="/" /> }
+                 {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <TutorialUpload /> }
               </Route>
               <Route path="/segédlet">
-                 {!user && <Redirect to="/" /> }
+                 {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <Tutorial/> }
               </Route>
               <Route path="/anyagrendelés">
-                 {!user && <Redirect to="/" /> }
+                 {!user && <Redirect to="bejelentkezés" /> }
                  {user && <MaterialOrder/> }
               </Route>
               <Route path="/riport">
-                 {!user && <Redirect to="/" /> }
+                 {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <Riport/> }
               </Route>
               <Route path="/napló">
-                 {!user && <Redirect to="/" /> }
+                 {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <Note/> }
               </Route>
               <Route path="/kollégák">
-                 {!user && <Redirect to="/" /> }
+                 {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <Collegaue/> }
               </Route>
               <Route path="/regisztráció">   
-                 {!user && <Redirect to="/" /> }
+                 {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <Signup /> }          
-               <Signup /> 
+              
               </Route>
               <Route path="/bom">
                 <Bom />
@@ -111,7 +111,7 @@ function App() {
                 <Inventories />
               </Route>
               <Route path="/chat">
-                {!user && <Redirect to="/login" /> }
+                {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <Chat /> }
               </Route>
             </Switch>

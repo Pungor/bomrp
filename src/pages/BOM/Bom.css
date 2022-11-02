@@ -1,0 +1,36 @@
+.bom {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 30px;
+    max-width: 1200px;
+    margin: 20px 20px;
+  }
+  .bom .card {
+    background: #fff;
+    color: #333;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .bom .card:hover {
+    transform: rotate(3deg);
+  }
+  .bom .card h2 {
+    color: rgb(228, 19, 19);
+    margin-bottom: 6px;
+  }
+
+  .bom .material p{
+    font-size:large;
+    font-style:oblique;
+    
+  }
+  .bom .card  .note p{
+    text-decoration: underline;
+    font-size:medium;
+    font-weight: bold;
+  }
+
+
