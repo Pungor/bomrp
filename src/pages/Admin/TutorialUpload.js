@@ -1,22 +1,29 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { projectStorage} from "../../firebase/config"
+import { projectStorage, projectFirestore} from "../../firebase/config"
+
 import './TutorialUpload.css'
 
 export default function TutorialUpload() {
 
   const [errorMessage, setErrorMessage] = useState(null)
   const[tutorial, setTutorial]=useState(null)
+  
   const history = useHistory()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-     
+    let fileurl="bomrp-2dd1f.appspot.com/"
       const uploadPath = `tutorial/${tutorial.name}`
-      const img =  projectStorage.ref(uploadPath).put(tutorial)
-    //  const imgUrl = img.ref.getDownloadURL()
- 
+      projectStorage.ref(uploadPath).put(tutorial)
+      //const imgUrl = img.ref.getDownloadURL()
+       projectFirestore.collection('files').doc().set({ 
+        fileName: tutorial.name,
+        fileUrl:fileurl+uploadPath,
+
+      })
     // window.location.reload(false)
+
     setTutorial(null)
     
      history.push('/admin')
@@ -28,6 +35,7 @@ export default function TutorialUpload() {
     setErrorMessage(null)
     setTutorial(null)
     let selected = e.target.files[0]
+   
 
 
     if (!selected) {
@@ -44,6 +52,7 @@ export default function TutorialUpload() {
     }
     */
     setTutorial(selected)
+    
   
    
   }
@@ -64,6 +73,7 @@ export default function TutorialUpload() {
         <button className="btn">Rögzítés</button>
         {errorMessage && <div className="error">{errorMessage}</div>}
       </form>
+      
     </div>
   )
 }

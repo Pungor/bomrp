@@ -1,0 +1,22 @@
+.tutorial {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px;
+  max-width: 500px;
+  margin: auto;
+
+
+}
+.tutorial .card {
+
+  color:  rgb(228, 19, 19);
+  padding: 10px;
+  border-radius: 4px;
+  
+  transition: all 0.3s ease;
+  position: relative;
+
+}
+.tutorial .card:hover {
+  transform: rotate(3deg);
+}

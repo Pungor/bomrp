@@ -1,6 +1,5 @@
 
-import { useFirestore } from "../../hooks/useFirestore"
-import { useHistory } from 'react-router-dom'
+
 import { useEffect, useState } from "react"
 import {  projectFirestore} from "../../firebase/config"
 
@@ -25,7 +24,7 @@ export default function Bom() {
   }, [])
 
   return (
-
+    
     <div className="bom">
 
         {info.map(info => (

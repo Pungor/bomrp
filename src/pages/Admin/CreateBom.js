@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState} from 'react'
 import { useHistory } from 'react-router-dom'
 import { useFirestore } from '../../hooks/useFirestore'
-import { useCollection } from '../../hooks/useCollection'
+
 
 // styles
 import './CreateBom.css'
@@ -14,8 +14,8 @@ export default function CreateBom() {
   const [volumen, setVolumen] = useState('')
   const [newMaterial, setNewMaterial] = useState('')
   
-  const { documents, error } = useCollection('bom')
-  const { addDocument, response } = useFirestore('bom')
+ 
+  const { addDocument } = useFirestore('bom')
   const history = useHistory()
 
   
@@ -30,7 +30,7 @@ export default function CreateBom() {
 
     })
     history.push('/admin')
-
+    setMaterials("")
   }
   let text=""
   const list=()=>{
@@ -55,14 +55,7 @@ export default function CreateBom() {
 
   }
 
-  // redirect the user when we get data response
-  /*useEffect(() => {
-    if (response) {
-      history.push('/')
-    }
-  }, [response, history])*/
-
-
+  
   return (
     <div className="create">
       <h2 className="page-title">"Termékjegyzék": BOM lista készítése</h2>
