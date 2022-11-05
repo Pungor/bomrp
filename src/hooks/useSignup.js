@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react'
 import { projectAuth, projectStorage, projectFirestore } from '../firebase/config'
 import { useAuthContext } from './useAuthContext'
+import { useLog } from './useLog'
 
 export const useSignup = () => {
   const [isCancelled, setIsCancelled] = useState(false)
   const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false)
   const { dispatch } = useAuthContext()
+  const {logging}= useLog()
 
   const signup = async (email, password, displayName, thumbnail) => {
     setError(null)
     setIsPending(true)
+    let userId=''
   
     try {
       // signup
@@ -33,8 +36,9 @@ export const useSignup = () => {
         online: false,
         displayName,
         photoURL: imgUrl,
+      
       })
-
+      userId =res.user.uid
       // dispatch login action
       dispatch({ type: 'LOGIN', payload: res.user })
 
@@ -42,11 +46,13 @@ export const useSignup = () => {
         setIsPending(false)
         setError(null)
       }
+    //  logging(userId, new Date(), "kolléga regisztrálása")
     } 
     catch(err) {
       if (!isCancelled) {
         setError(err.message)
         setIsPending(false)
+      //  logging(userId, new Date(), "sikertelen regisztráció")
       }
     }
   }
