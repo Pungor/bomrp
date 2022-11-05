@@ -23,6 +23,7 @@ import UsedMaterial from './pages/UsedMaterial/UsedMaterial'
 import Riport from './pages/Riport/Riport'
 import Note from './pages/Admin/Note'
 import Collegaue from './pages/Admin/Collegaue'
+import CollageueData from './pages/Admin/CollageueData'
 
 
 function App() {
@@ -97,6 +98,10 @@ function App() {
               <Route path="/kollégák">
                  {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <Collegaue/> }
+              </Route>
+              <Route path="/kolléganyilvántartás">
+                 {!user && <Redirect to="/bejelentkezés" /> }
+                 {user && <CollageueData/> }
               </Route>
               <Route path="/regisztráció">   
                  {!user && <Redirect to="/bejelentkezés" /> }
