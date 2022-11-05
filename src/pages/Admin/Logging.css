@@ -1,0 +1,42 @@
+table {
+    table-layout: auto;
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    
+    
+  }
+
+  thead th:nth-child(1) {
+    width: 40%;
+  }
+  
+  thead th:nth-child(2) {
+    width: 10%;
+  }
+  thead th:nth-child(3) {
+    width: 50%;
+  }
+
+  tbody td {
+    text-align: center;
+    border: 1px solid black;
+   
+  }
+  /*
+  tbody tr:nth-child(odd) {
+    background-color: var(--bg-color);
+  }
+
+  
+  tbody tr:nth-child(even) {
+    background-color: var(--text-color);
+  }*/
+  caption{
+    font-size: larger;
+    font-weight: bold;
+    color: rgb(228, 19, 19);
+    position: -webkit-sticky; 
+    position: sticky;
+    top: 0;
+  }

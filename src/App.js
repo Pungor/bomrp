@@ -21,7 +21,7 @@ import TutorialUpload from './pages/Admin/TutorialUpload'
 import MaterialOrder from './pages/Admin/MaterialOrder'
 import UsedMaterial from './pages/UsedMaterial/UsedMaterial'
 import Riport from './pages/Riport/Riport'
-import Note from './pages/Admin/Note'
+import Logging from './pages/Admin/Logging'
 import Collegaue from './pages/Admin/Collegaue'
 import CollageueData from './pages/Admin/CollageueData'
 
@@ -93,7 +93,7 @@ function App() {
               </Route>
               <Route path="/napló">
                  {!user && <Redirect to="/bejelentkezés" /> }
-                 {user && <Note/> }
+                 {user && <Logging/> }
               </Route>
               <Route path="/kollégák">
                  {!user && <Redirect to="/bejelentkezés" /> }
