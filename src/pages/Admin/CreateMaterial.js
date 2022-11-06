@@ -13,6 +13,12 @@ export default function CreateMaterial() {
   const [materialId, setMaterialId] = useState('')
   const [materialDate, setMaterialDate] = useState('')
   const [materialStatus, setMaterialStatus] = useState('')
+  const [volType, setVolType] = useState('')
+  const inventoryCode='0101'
+  const materialIn=''
+  const materialOut=''
+  const volumen=0
+
 
   const {addDocument} = useFirestore('materiallist')
 
@@ -21,22 +27,22 @@ export default function CreateMaterial() {
   
   const handleSubmit = async(e) => {
     e.preventDefault()
- 
-  //setMaterialStatus()
- 
-  //setMaterialDate(timestamp.fromDate(new Date(materialDate)))
-
 
     await addDocument({
       material:materialName,
       id:materialId,
       date:materialDate,
       status:materialStatus,
+      volType: volType,
+      inventoryCode:inventoryCode,
+      materialIn:materialIn,
+      materialOut:materialOut,
+      volumen:volumen,
     })
       setMaterialDate('')
       setMaterialId('')
       setMaterialName('')
-   
+      setVolType('')
       history.push('/admin')
 
   }
@@ -45,7 +51,7 @@ export default function CreateMaterial() {
 
   return (
     <div className="create">
-      <h2 className="page-title">Anyagok rögzítése</h2>
+      <h2 className="page-title">Új anyag rögzítése</h2>
       <form onSubmit={handleSubmit}>
 
         <label>
@@ -70,7 +76,7 @@ export default function CreateMaterial() {
         <label>
           <span>Gyártás/hitelesítés éve</span>
           <input 
-            type="date" 
+            type="text" 
             onChange={(e) => setMaterialDate(e.target.value)}
             value={materialDate}
             required
@@ -82,6 +88,14 @@ export default function CreateMaterial() {
           <select id='statusSelect' onChange={(e)=>setMaterialStatus(e.target.value)}>
             <option value="true" >igen</option> 
             <option value="false" >nem</option>
+            <option value="-" selected>-</option>
+          </select>
+        </label>
+        <label>
+          <span>Kiszerelési egység</span>
+          <select id='volType' onChange={(e)=>setVolType(e.target.value)}>
+            <option value="m" >méter</option> 
+            <option value="db" >db</option>
             <option value="-" selected>-</option>
           </select>
         </label>
