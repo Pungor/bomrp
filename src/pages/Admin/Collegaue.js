@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useFirestore } from '../../hooks/useFirestore'
+import {  projectFirestore} from "../../firebase/config"
 
 import './Collegaue.css'
 
@@ -16,7 +17,7 @@ export default function Collegaue() {
   const [born, setBorn] = useState('')
 
   const {addDocument} = useFirestore('collageues')
-
+  const [info,setInfo] = useState([])
   const history = useHistory()
 
  
@@ -50,6 +51,19 @@ const collData=()=>{
  history.push('/kolléganyilvántartás')
 
 }
+useEffect(()=>{
+  projectFirestore.collection('users')
+    .get().then((querySnapshot)=>{
+      querySnapshot.forEach(element=>{
+        var data = element.data();
+        setInfo(arr => [...arr , data])
+       
+        })
+      
+    })
+
+  
+}, [])
 
   return (
     <div className="collageue">
@@ -77,16 +91,13 @@ const collData=()=>{
           required
         />
       </label>
-      <label>
-        <span>E-mail cím</span>
-        <input 
-          type="e-mail" 
-          onChange={(e) => setEmailAddress(e.target.value)}
-          value={emailAddress}
-          required
-        />
-      </label>
 
+      <select  onChange={(e)=>setEmailAddress(e.target.value)}>    
+        <option defaultValue={"-"}>-</option>  
+          {info.map(info=>(
+             <option key={info} value={info.emailName}>{info.emailName}</option>                    
+                    ))}       
+        </select>
       <label>
         <span>Raktárhely kódja:</span>
         <input 

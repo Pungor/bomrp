@@ -46,7 +46,7 @@ export default function Signup() {
 
   return (
     <form onSubmit={handleSubmit} className="auth-form">
-      <h2>Regisztráció</h2>
+      <h2>Kolléga regisztrációja</h2>
       <label>
         <span>email:</span>
         <input

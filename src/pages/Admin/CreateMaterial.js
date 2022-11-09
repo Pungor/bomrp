@@ -15,8 +15,6 @@ export default function CreateMaterial() {
   const [materialStatus, setMaterialStatus] = useState('')
   const [volType, setVolType] = useState('')
   const inventoryCode='0101'
-  const materialIn=''
-  const materialOut=''
   const volumen=0
 
 
@@ -31,13 +29,16 @@ export default function CreateMaterial() {
     await addDocument({
       material:materialName,
       id:materialId,
-      date:materialDate,
+      certifyDate:materialDate,
       status:materialStatus,
       volType: volType,
       inventoryCode:inventoryCode,
-      materialIn:materialIn,
-      materialOut:materialOut,
       volumen:volumen,
+      maxInvLevel:0,
+      orderQuantity:0,
+      reorderPoint:0,
+      securityInvLevel:0,
+      
     })
       setMaterialDate('')
       setMaterialId('')

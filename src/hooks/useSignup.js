@@ -36,6 +36,7 @@ export const useSignup = () => {
         online: false,
         displayName,
         photoURL: imgUrl,
+        emailName:email,
       
       })
       userId =res.user.uid

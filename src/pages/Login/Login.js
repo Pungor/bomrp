@@ -33,7 +33,7 @@ export default function Login() {
         <span>jelszó:</span>
         <input 
           required
-          type="password" 
+          type="text" 
           onChange={(e) => setPassword(e.target.value)} 
           value={password} 
         />

@@ -13,7 +13,7 @@ export default function MaterialIn() {
   const history = useHistory()
 
   var updateVolumen=null
-  const [incoming,setIncoming] = useState([])
+ // const [incoming,setIncoming] = useState([])
   const [info,setInfo] = useState([])
 
   //const [docId, setDocId]=useState([])
@@ -29,7 +29,7 @@ export default function MaterialIn() {
           })
         
       })
-      projectFirestore.collection('incomingMaterial')
+    /*  projectFirestore.collection('incomingMaterial')
       .get().then((querySnapshot)=>{
         querySnapshot.forEach(element=>{
           var data = element.data();
@@ -37,7 +37,7 @@ export default function MaterialIn() {
          
           })
         
-      })
+      })*/
     
   }, [])
 //console.log(incoming)
@@ -52,25 +52,27 @@ export default function MaterialIn() {
     })   
 //update the material volumen in materiallist
     updateVolumen+=parseInt(volumen)
-    incoming.forEach(incoming=>{
-      if(materialName===incoming.materialName){
-       updateVolumen+=parseInt(incoming.volumen)
+    info.forEach(inf=>{
+      if(inf.material===materialName){
+       updateVolumen+=parseInt(inf.volumen)
     }})
   //to get the doc.id for looping through each materials, and update the right material volumen
      updateMaterial.get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
          //setDocId(doc.id)
          // console.log(doc.id)
-          incoming.forEach(incoming=>{
-            if(materialName===incoming.materialName){
+          info.forEach(inf=>{
+            if(materialName===inf.material){
             // updateVolumen+=parseInt(incoming.volumen)
             updateMaterial.doc(doc.id).update({volumen:updateVolumen})
           }})
             console.log(updateVolumen)
+          
          // updateMaterial.doc(doc.id).update({volumen:updateVolumen})
       })})
 
    // console.log(updateVolumen)
+   //console.log(incoming)
      history.push('/admin')
 
   }

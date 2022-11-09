@@ -6,7 +6,7 @@ import './CollageueData.css'
 export default function CollageueData() {
 
     const [info , setInfo] = useState([]);
-
+    
     useEffect(()=>{
        
       projectFirestore.collection('collageues')
@@ -14,18 +14,19 @@ export default function CollageueData() {
           querySnapshot.forEach(element=>{
             var data = element.data();
             setInfo(arr => [...arr , data])
-           
+          
             })
           
         })
        
     }, [])
-  
+ 
   return (
-    <div className="bom">
-
+    <div className="collageues">
+    
         {info.map(info => (
-                <div className="card">
+                <div className="card" >
+                  
                   <h2>{info.lastName} {info.firstName}</h2>
 
                   <div className="note">
