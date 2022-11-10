@@ -28,7 +28,7 @@ export default function CreateMaterial() {
 
     await addDocument({
       material:materialName,
-      id:materialId,
+      materialId:materialId,
       certifyDate:materialDate,
       status:materialStatus,
       volType: volType,

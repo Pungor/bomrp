@@ -11,12 +11,13 @@ export default function MaterialIn() {
   const [volumen,setVolumen] = useState('')  
   const {addDocument} = useFirestore('incomingMaterial')
   const history = useHistory()
+  let updateVolumen=null
+  let referenceName=''
+  let referenceVolumen=null
+  let referenceId=''
 
-  var updateVolumen=null
- // const [incoming,setIncoming] = useState([])
   const [info,setInfo] = useState([])
-
-  //const [docId, setDocId]=useState([])
+  const [docId, setDocId]=useState([])
   const updateMaterial= projectFirestore.collection('materiallist')
 
   useEffect(()=>{
@@ -24,23 +25,16 @@ export default function MaterialIn() {
       .get().then((querySnapshot)=>{
         querySnapshot.forEach(element=>{
           var data = element.data();
+          var dataId=element.id
           setInfo(arr => [...arr , data])
+          setDocId(arr2 => [...arr2 , dataId])
          
           })
         
       })
-    /*  projectFirestore.collection('incomingMaterial')
-      .get().then((querySnapshot)=>{
-        querySnapshot.forEach(element=>{
-          var data = element.data();
-          setIncoming(arr => [...arr , data])
-         
-          })
-        
-      })*/
     
   }, [])
-//console.log(incoming)
+  console.log(info)
   const handleSubmit = async(e) => {
     e.preventDefault()
 
@@ -50,29 +44,29 @@ export default function MaterialIn() {
       invCode:'0101',
       materialDate: new Date(),
     })   
-//update the material volumen in materiallist
+    //update the material volumen in materiallist
     updateVolumen+=parseInt(volumen)
-    info.forEach(inf=>{
-      if(inf.material===materialName){
-       updateVolumen+=parseInt(inf.volumen)
-    }})
-  //to get the doc.id for looping through each materials, and update the right material volumen
-     updateMaterial.get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-         //setDocId(doc.id)
-         // console.log(doc.id)
-          info.forEach(inf=>{
-            if(materialName===inf.material){
-            // updateVolumen+=parseInt(incoming.volumen)
-            updateMaterial.doc(doc.id).update({volumen:updateVolumen})
-          }})
-            console.log(updateVolumen)
-          
-         // updateMaterial.doc(doc.id).update({volumen:updateVolumen})
-      })})
 
-   // console.log(updateVolumen)
-   //console.log(incoming)
+     for(var i=0;i<info.length;i++){
+      if(info[i].material===materialName){
+        referenceName=info[i].material
+        referenceVolumen=info[i].volumen
+        updateVolumen+=referenceVolumen
+        referenceId=docId[i]
+        console.log(referenceId)
+        updateMaterial.doc(referenceId).update({volumen:updateVolumen})  
+      }
+
+     }
+     console.log(referenceName)
+     console.log(referenceVolumen)
+    /*  updateMaterial.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+              updateMaterial.doc(referenceId).update({volumen:updateVolumen})     
+
+        })})*/
+     console.log(updateVolumen)
+     console.log(updateVolumen)
      history.push('/admin')
 
   }

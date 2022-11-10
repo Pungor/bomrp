@@ -1,0 +1,51 @@
+.inventories table {
+    table-layout: auto;
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+
+  }
+
+  .inventories table thead th:nth-child(1) {
+    width: 20%;
+  }
+  
+  .inventories table thead th:nth-child(2) {
+    width: 20%;
+  }
+  .inventories table thead th:nth-child(3) {
+    width: 30%;
+  }
+  .inventories table thead th:nth-child(4) {
+    width: 10%;
+  }
+  .inventories table thead th:nth-child(5) {
+    width: 20%;
+  }
+
+  .inventories tbody td {
+    text-align: center;
+    border: 1px solid black;
+   
+  }
+
+  .inventories caption{
+    font-size: x-large;
+    font-weight: bold;
+    color: rgb(228, 19, 19);
+    position: -webkit-sticky; 
+    position: sticky;
+    top: 0;
+  }
+  .inventories table tbody tr:nth-of-type(even) {
+    background-color: #a9e125;
+}
+    .inventories tbody tr:hover {
+        background-color: #ddd;
+    }
+    .inventories thead {
+        background-color: #ddd;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+    }
