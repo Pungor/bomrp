@@ -1,7 +1,7 @@
-import { useState} from 'react'
+import { useState, useEffect} from 'react'
 import { useHistory } from 'react-router-dom'
 import { useFirestore } from '../../hooks/useFirestore'
-
+import {  projectFirestore} from "../../firebase/config"
 
 // styles
 import './CreateBom.css'
@@ -13,12 +13,24 @@ export default function CreateBom() {
   const [volumenType, setVolumenType] = useState('')
   const [volumen, setVolumen] = useState('')
   const [newMaterial, setNewMaterial] = useState('')
-  
+  const [info,setInfo] = useState([])
  
   const { addDocument } = useFirestore('bom')
   const history = useHistory()
 
-  
+
+  useEffect(()=>{
+    projectFirestore.collection('materiallist')
+      .get().then((querySnapshot)=>{
+        querySnapshot.forEach(element=>{
+          var data = element.data();
+          setInfo(arr => [...arr , data])
+         
+          })
+        
+      })
+    
+  }, [])
   
   const handleSubmit = () => {
    
@@ -74,12 +86,12 @@ export default function CreateBom() {
         <label>
           <span>Szükséges anyagok</span>
           <div className="ingredients">
-            <input 
-              type="text" 
-              onChange={(e) => setNewMaterial(e.target.value)}
-              value={newMaterial}
-             
-            />
+            <select id='chooseMaterial' onChange={(e)=>setNewMaterial(e.target.value)}>    
+              <option defaultValue={"-"}>-</option>  
+                {info.map(info=>(
+                  <option key={info} value={info.material}>{info.material}</option>                    
+                          ))}       
+              </select>
            </div>
         </label>
         <label>

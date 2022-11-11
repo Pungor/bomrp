@@ -4,6 +4,7 @@
     border: 1px solid black;
     border-collapse: collapse;
 
+
   }
 
   .inventories table thead th:nth-child(1) {
@@ -33,19 +34,18 @@
     font-size: x-large;
     font-weight: bold;
     color: rgb(228, 19, 19);
-    position: -webkit-sticky; 
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
   }
-  .inventories table tbody tr:nth-of-type(even) {
-    background-color: #a9e125;
-}
+  .inventories tbody tr:nth-child(even){
+    background-color: #19afeb;} 
+
     .inventories tbody tr:hover {
         background-color: #ddd;
     }
     .inventories thead {
         background-color: #ddd;
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
+
     }
+ 
