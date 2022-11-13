@@ -15,6 +15,7 @@ import Chat from './pages/Chat/Chat'
 import CreateBom from './pages/Admin/CreateBom'
 import CreateMaterial from './pages/Admin/CreateMaterial'
 import CreateMrp from './pages/Admin/CreateMrp'
+import OrderedMaterial from './pages/Admin/OrderedMaterial'
 import MaterialIn from './pages/Admin/MaterialIn'
 import MaterialOut from './pages/Admin/MaterialOut'
 import TutorialUpload from './pages/Admin/TutorialUpload'
@@ -102,6 +103,10 @@ function App() {
               <Route path="/kolléganyilvántartás">
                  {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <CollageueData/> }
+              </Route>
+              <Route path="/feladottrendelések">
+                 {!user && <Redirect to="/bejelentkezés" /> }
+                 {user && <OrderedMaterial/> }
               </Route>
               <Route path="/regisztráció">   
                  {!user && <Redirect to="/bejelentkezés" /> }

@@ -147,7 +147,7 @@ export default function CreateMrp() {
           
         />
         </label>
-        <button className="btn">Hozzáad</button>
+        <button className="btn">Módosít</button>
       </form>
   </div> 
   )
