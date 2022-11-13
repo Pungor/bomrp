@@ -16,6 +16,44 @@ export default function CreateMrp() {
   const [maximum,setMaximum] = useState('')
   const [reorder,setReorder] = useState('')
   const [orderQuantity,setOrderQuantity] = useState('')
+
+  let phMin=()=>{
+    for(var i=0;i<info.length;i++){
+      if(info[i].material===materialName){
+
+       return info[i].securityInvLevel
+
+      }
+    }
+  }
+
+  let phMax=()=>{
+    for(var i=0;i<info.length;i++){
+      if(info[i].material===materialName){
+
+       return info[i].maxInvLevel
+
+      }
+    }
+  }
+  let phReorder=()=>{
+    for(var i=0;i<info.length;i++){
+      if(info[i].material===materialName){
+
+       return info[i].reorderPoint
+
+      }
+    }
+  }
+  let phOrderQuantity=()=>{
+    for(var i=0;i<info.length;i++){
+      if(info[i].material===materialName){
+
+       return info[i].orderQuantity
+
+      }
+    }
+  }
  
 
   useEffect(()=>{
@@ -26,7 +64,7 @@ export default function CreateMrp() {
           var dataId=element.id
           setInfo(arr => [...arr , data])
           setDocId(arr2 => [...arr2 , dataId])
-          
+        
           })
         
       })
@@ -53,15 +91,15 @@ export default function CreateMrp() {
 
   }
 
-console.log(minimum)
-
   return (
     <div className="create">
       <h2 className="page-title">MRP szintek beállítása</h2>
       <form onSubmit={handleSubmit}>
         <label>
         <span>Anyag kiválasztása</span>
-          <select id='chooseMaterial' onChange={(e)=>setMaterialName(e.target.value)}>    
+          <select id='chooseMaterial' onChange={(e)=>setMaterialName(e.target.value)
+
+                }>    
             <option defaultValue={"-"}>-</option>  
               {info.map(info=>(
             <option key={info} value={info.material} >{info.material}</option>                    
@@ -74,6 +112,7 @@ console.log(minimum)
           type="number" min="0" 
           onChange={(e) => setMinimum(e.target.value)}
           value={minimum}
+          placeholder={phMin()}
 
           
         />
@@ -84,6 +123,7 @@ console.log(minimum)
           type="number" min="0" 
           onChange={(e) => setMaximum(e.target.value)}
           value={maximum}
+          placeholder={phMax()}
           
         />
         </label>
@@ -93,6 +133,7 @@ console.log(minimum)
           type="number" min="0" 
           onChange={(e) => setReorder(e.target.value)}
           value={reorder}
+          placeholder={phReorder()}
           
         />
         </label>
@@ -102,6 +143,7 @@ console.log(minimum)
           type="number" min="0" 
           onChange={(e) => setOrderQuantity(e.target.value)}
           value={orderQuantity}
+          placeholder={phOrderQuantity()}
           
         />
         </label>
