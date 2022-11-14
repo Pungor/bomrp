@@ -1,0 +1,47 @@
+.materialOut {
+    color: #555;
+    max-width: 480px;
+    margin: 0px auto;
+  }
+  .materialOut .page-title{
+    color: rgb(228, 19, 19);
+    font-size:x-large;
+
+  }
+  .materialOut label span {
+    display: block;
+    margin: 0px 0 10px;
+    font-style:italic;
+    
+    
+  }
+  .materialOut p {
+    margin-top: 0px;
+    font-size: 0.8em;
+  }
+  .materialOut .btn {
+    display: block;
+    width: 100px;
+    font-size: 1em;
+    color: #fff;
+    padding: 8px 20px;
+    border: 0;
+    border-radius: 4px;
+    background-color: #58249c;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 20px auto;
+  }
+
+.materialOut .code {
+
+  
+    width:fit-content;
+    font-style: normal;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.materialOut .btn:hover {
+   
+    background-color: var(--primary-color);
+  }

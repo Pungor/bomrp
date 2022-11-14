@@ -38,6 +38,7 @@ export default function CreateMaterial() {
       orderQuantity:0,
       reorderPoint:0,
       securityInvLevel:0,
+      orderedVolumen:0,
       
     })
       setMaterialDate('')
