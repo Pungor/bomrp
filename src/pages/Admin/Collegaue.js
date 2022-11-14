@@ -15,6 +15,7 @@ export default function Collegaue() {
   const [skills, setSkills] = useState('')
   const [fam, setFam] = useState('')
   const [born, setBorn] = useState('')
+ // const [materials, setMaterials] = useState([])
 
   const {addDocument} = useFirestore('collageues')
   const [info,setInfo] = useState([])
@@ -23,9 +24,10 @@ export default function Collegaue() {
  
   const handleSubmit = async(e) => {
     e.preventDefault()
- 
-
-   
+ /*let materialName=""
+ let volumen=0
+ materials.push({materialName, volumen})
+*/
     await addDocument({
      born: born,
      emailAddress:emailAddress,
@@ -34,6 +36,7 @@ export default function Collegaue() {
      invCode: invCode,
      lastName: collLastName,
      skills: skills,
+    // collMaterial:materials
     })
       setCollFirstName('')
       setCollLastName('')

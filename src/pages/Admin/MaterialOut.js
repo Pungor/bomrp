@@ -15,14 +15,13 @@ export default function MaterialOut() {
   const [docId, setDocId]=useState([])
   const [collId, setCollId]=useState([])
   const [materials, setMaterials] = useState([])
+
   const history = useHistory()
   const updateMaterial= projectFirestore.collection('materiallist')
   const updateCollMaterial= projectFirestore.collection('collageues')
   const [orderError, setOrderError] = useState("")
 
 
-
-  console.log(materials)
   const handleSubmit = async(e) => {
     e.preventDefault()
     for(var i=0;i<info.length;i++){
@@ -34,25 +33,36 @@ export default function MaterialOut() {
              }  
           )
           for(var j=0;j<infoOrder.length;j++){
-            if(infoOrder[j].invCode===code){
-                infoOrder[j].collMaterial.forEach(fe=>{
-                    materials.push(fe)
-
-                })     
-                materials.forEach(m=>{
-
-
-                })    
-                materials.push({materialName,volumen})
-                  console.log(materials)
-                updateCollMaterial.doc(collId[j]).update({
+            if(infoOrder[j].filter(filt=>filt.includes("collMaterial"))){
+              infoOrder[j].filter(filt=>filt.includes("collMaterial")).map(info=>{
+                if(info.collMaterial.materialName===materialName && info.invCode===code){
+                  let  feVolumen=0
+                  feVolumen=parseInt(info.volumen)+parseInt(volumen)
+                   materials.push({volumen:feVolumen, materialName:materialName})
+                 
+                }
+                else{
+                  materials.push(info)
+                } 
+              return materials
+              })
+              updateCollMaterial.doc(collId[j]).update({
           
-                    collMaterial:materials,
-                      }  
-                    )
-                  
+                collMaterial:materials,
+                  }  
+                )
+              }else{
+                let  feVolumen=0
+                feVolumen=parseInt(volumen)
+                 materials.push({volumen:feVolumen, materialName:materialName})
+                 updateCollMaterial.doc(collId[j]).update({
+          
+                  collMaterial:materials,
+                    }  
+                  )
+                history.push('/admin')
               }
-              history.push('/admin')
+
             }
          
              
@@ -113,7 +123,7 @@ export default function MaterialOut() {
         </select>
       </label>
       <label>
-        <span>Anyag áttárolási helye (0101-es)</span>
+        <span>Anyag áttárolási helye (0101-es raktárhelyről)</span>
           <select id='chooseCode' required onChange={(e)=>setCode(e.target.value)}>    
             <option defaultValue={"-"}>-</option>  
             {infoOrder.filter(filt=>filt.invCode.includes("7")).map(info=>(
