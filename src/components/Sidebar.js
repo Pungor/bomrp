@@ -43,22 +43,13 @@ export default function Sidebar() {
                   <span>Raktárkészlet</span>
               </NavLink>              
             </li>
-            <li>
-              <NavLink to="/anyagfelhasnálás">
-                  <span>Anyagok felhasználása</span>
-              </NavLink>              
-            </li>
             
             <li>
               <NavLink to="/segédlet">
                   <span>Segédletek, információk</span>
               </NavLink>              
             </li>
-            <li>
-              <NavLink to="/riport">
-                  <span>Kimutatások</span>
-              </NavLink>              
-            </li>
+
           </ul>
         </nav>
       </div>

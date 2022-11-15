@@ -5,7 +5,7 @@ import './CreateMrp.css'
 
 export default function CreateMrp() {
 
-  //window.scrollTo(0, 0)
+  window.scrollTo(0, 0)
   const [info,setInfo] = useState([])
   const [docId, setDocId]=useState([])
   const history = useHistory()
@@ -75,8 +75,13 @@ export default function CreateMrp() {
 
     for(var i=0;i<info.length;i++){
      if(info[i].material===materialName){
+   /*   if(maximum===''){setMaximum(info[i].maxInvLevel)}
+      if(orderQuantity===''){setOrderQuantity(info[i].orderQuantity)}
+      if(reorder===''){setReorder(info[i].reorderPoint)}
+      if(minimum===''){setMinimum(info[i].securityInvLevel)}
+      */
 
- 
+
        updateMaterial.doc(docId[i]).update({
         maxInvLevel:parseInt(maximum), 
         orderQuantity:parseInt(orderQuantity), 

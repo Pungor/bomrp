@@ -20,8 +20,6 @@ import MaterialIn from './pages/Admin/MaterialIn'
 import MaterialOut from './pages/Admin/MaterialOut'
 import TutorialUpload from './pages/Admin/TutorialUpload'
 import MaterialOrder from './pages/Admin/MaterialOrder'
-import UsedMaterial from './pages/UsedMaterial/UsedMaterial'
-import Riport from './pages/Riport/Riport'
 import Logging from './pages/Admin/Logging'
 import Collegaue from './pages/Admin/Collegaue'
 import CollageueData from './pages/Admin/CollageueData'
@@ -72,10 +70,7 @@ function App() {
                  {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <MaterialOut /> }
               </Route>              
-              <Route path="/anyagfelhasználás">
-                 {!user && <Redirect to="/bejelentkezés" /> }
-                 {user && <UsedMaterial /> }
-              </Route>
+
               <Route path="/segédletupload">
                  {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <TutorialUpload /> }
@@ -88,10 +83,7 @@ function App() {
                  {!user && <Redirect to="bejelentkezés" /> }
                  {user && <MaterialOrder/> }
               </Route>
-              <Route path="/riport">
-                 {!user && <Redirect to="/bejelentkezés" /> }
-                 {user && <Riport/> }
-              </Route>
+
               <Route path="/napló">
                  {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <Logging/> }

@@ -9,7 +9,7 @@
   }
   .sidebar-content {
   position: fixed;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
     width: inherit;
   }
   .sidebar .user {
@@ -26,6 +26,7 @@
   .sidebar .links {
     margin-top: 40px;
     margin-left: 20px;
+  
   }
   .sidebar .links li {
     margin-top: 0px;
@@ -37,6 +38,7 @@
     width: 100%;
     color: #fff;
     box-sizing: border-box;
+    font-size: large;
   }
   .sidebar .links img {
     margin-right: 10px;
