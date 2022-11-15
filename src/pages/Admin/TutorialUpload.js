@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { projectStorage, projectFirestore} from "../../firebase/config"
-
+import { projectAuth} from "../../firebase/config"
+import { useLog } from '../../hooks/useLog'
 import './TutorialUpload.css'
 
 export default function TutorialUpload() {
 
   const [errorMessage, setErrorMessage] = useState(null)
   const[tutorial, setTutorial]=useState(null)
-  
+  const {logging}= useLog()
+  const { uid } = projectAuth.currentUser
   const history = useHistory()
 
   const handleSubmit = (e) => {
@@ -25,7 +27,7 @@ export default function TutorialUpload() {
     // window.location.reload(false)
 
     setTutorial(null)
-    
+    logging(uid, new Date(), "segédanyag feltöltése")
      history.push('/admin')
  
   }

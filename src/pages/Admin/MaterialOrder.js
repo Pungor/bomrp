@@ -4,7 +4,8 @@ import './MaterialOrder.css'
 import { useFirestore } from '../../hooks/useFirestore'
 import { useHistory } from 'react-router-dom'
 import { useAuthContext } from '../../hooks/useAuthContext'
-
+import { projectAuth} from "../../firebase/config"
+import { useLog } from '../../hooks/useLog'
 
 export default function MaterialOrder() {
 
@@ -17,7 +18,8 @@ export default function MaterialOrder() {
   const [active, setActive] = useState(false);
   const { user } = useAuthContext()
   const updateMaterial= projectFirestore.collection('materiallist')
-  
+  const {logging}= useLog()
+  const { uid } = projectAuth.currentUser
 
   let tempVolumen=0
   let tempMaterial=0
@@ -93,10 +95,11 @@ const handleClick=()=>{
     }
    
   })
+  logging(uid, new Date(), "rendelés feladása")
   history.push('/feladottrendelések')
 }
 const orders=()=>{
-
+  //logging(uid, new Date(), "rendelések lekérdezése")
   history.push('/feladottrendelések')
 
 }

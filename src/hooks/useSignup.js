@@ -10,7 +10,7 @@ export const useSignup = () => {
   const { dispatch } = useAuthContext()
   const {logging}= useLog()
 
-  const signup = async (email, password, displayName, thumbnail) => {
+  const signup = async (email, password, chooseUser, displayName, thumbnail) => {
     setError(null)
     setIsPending(true)
     let userId=''
@@ -37,6 +37,7 @@ export const useSignup = () => {
         displayName,
         photoURL: imgUrl,
         emailName:email,
+        chooseUser:chooseUser,
       
       })
       userId =res.user.uid
@@ -47,13 +48,13 @@ export const useSignup = () => {
         setIsPending(false)
         setError(null)
       }
-    //  logging(userId, new Date(), "kolléga regisztrálása")
+      logging(userId, new Date(), "kolléga regisztrálása")
     } 
     catch(err) {
       if (!isCancelled) {
         setError(err.message)
         setIsPending(false)
-      //  logging(userId, new Date(), "sikertelen regisztráció")
+        logging(userId, new Date(), "sikertelen regisztráció")
       }
     }
   }

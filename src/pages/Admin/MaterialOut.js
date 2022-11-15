@@ -2,7 +2,9 @@ import { useEffect, useState } from "react"
 import {  projectFirestore} from "../../firebase/config"
 import { useFirestore } from '../../hooks/useFirestore'
 import { useHistory } from 'react-router-dom'
-
+import { useAuthContext } from '../../hooks/useAuthContext'
+import { projectAuth} from "../../firebase/config"
+import { useLog } from '../../hooks/useLog'
 import './MaterialOut.css'
 
 export default function MaterialOut() {
@@ -14,12 +16,17 @@ export default function MaterialOut() {
   const [infoOrder,setInfoOrder] = useState([])
   const [docId, setDocId]=useState([])
   const [collId, setCollId]=useState([])
-  const [materials, setMaterials] = useState([])
-  const [materialsUpdate, setMaterialsUpdate] = useState([])
+ // const [materials, setMaterials] = useState([])
+  //const [materialsUpdate, setMaterialsUpdate] = useState([])
   const history = useHistory()
   const updateMaterial= projectFirestore.collection('materiallist')
-  const updateCollMaterial= projectFirestore.collection('collageues')
+ // const updateCollMaterial= projectFirestore.collection('collageues')
   const [orderError, setOrderError] = useState("")
+  const [goal, setGoal] = useState("")
+  const {addDocument} = useFirestore('materialUsed')
+  const { user } = useAuthContext()
+  const {logging}= useLog()
+  const { uid } = projectAuth.currentUser
 
   const handleSubmit = async(e) => {
     e.preventDefault()
@@ -31,6 +38,17 @@ export default function MaterialOut() {
             volumen:info[i].volumen-volumen
              }  
            )
+           await addDocument({
+            usedMaterial:materialName,
+            usedVolumen: volumen,
+            usedVolumenType:info[i].volType,
+            usedGoal:goal,
+            usedInventory:code,
+            usedDate:new Date().toDateString(),
+            usedOperator: user.displayName,
+        
+          })
+          
         }else{
           
           setOrderError("Túl nagy értéket adtál meg, ellenőrizd a raktárkészletet!")
@@ -40,7 +58,7 @@ export default function MaterialOut() {
      }
     
    }
-  
+   logging(uid, new Date(), "anyagfelhasználás könyvelése")
    history.push('/admin')
 }
   useEffect(()=>{
@@ -68,11 +86,16 @@ export default function MaterialOut() {
         
       })
   }, [])
+  const usedMaterial=()=>{
+    history.push('/kikönyvelt')
 
+  }
+console.log(collId)
   return (
     
     <div className="materialOut">
-    <h2 className="page-title">Beérkező anyagok könyvelése</h2>
+    <h2 className="page-title">Felhasználandó anyagok könyvelése</h2>
+    <form onSubmit={usedMaterial}> <button  >Kikönyvelt anyagok</button></form>
     <form onSubmit={handleSubmit}>
 
 
@@ -91,7 +114,8 @@ export default function MaterialOut() {
             <option defaultValue={"-"}>-</option>  
             {infoOrder.filter(filt=>filt.invCode.includes("7")).map(info=>(
              <option key={info} value={info.invCode}>{info.invCode}</option>                    
-                    ))}      
+                    ))}    
+              <option value="0101">0101</option>    
           </select>
       </label>
    
@@ -104,7 +128,18 @@ export default function MaterialOut() {
             required
           />
         </label>
-
+        <label>
+          <span>Könyvelés oka</span>
+          <div >
+            <select id='goal' required onChange={(e)=>setGoal(e.target.value)}>    
+              <option defaultValue={"-"}>-</option>  
+              <option value="anyagfelhasználás">anyagfelhasználás</option> 
+              <option value="sérült">sérült</option> 
+              <option value="elveszett">elveszett</option> 
+  
+              </select>
+           </div>
+        </label>
 
       <button className="btn">Rögzítés</button>
       {orderError!=="" && <div className="error">{orderError}</div>}

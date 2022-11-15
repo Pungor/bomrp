@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useFirestore } from '../../hooks/useFirestore'
 import {  projectFirestore} from "../../firebase/config"
-
+import { projectAuth} from "../../firebase/config"
+import { useLog } from '../../hooks/useLog'
 import './Collegaue.css'
 
 export default function Collegaue() {
@@ -16,7 +17,8 @@ export default function Collegaue() {
   const [fam, setFam] = useState('')
   const [born, setBorn] = useState('')
  // const [materials, setMaterials] = useState([])
-
+  const {logging}= useLog()
+  const { uid } = projectAuth.currentUser
   const {addDocument} = useFirestore('collageues')
   const [info,setInfo] = useState([])
   const history = useHistory()
@@ -45,7 +47,7 @@ export default function Collegaue() {
       setSkills('')
       setFam('')
       setBorn('')
-   
+      logging(uid, new Date(), "kollégák nyilvántartása")
       history.push('/admin')
 
   }

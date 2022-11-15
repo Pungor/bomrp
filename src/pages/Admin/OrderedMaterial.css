@@ -34,7 +34,7 @@
   .ordered tbody td {
     text-align: center;
     border: 1px solid black;
-   
+   font-size: medium;
   }
 
   .ordered caption{

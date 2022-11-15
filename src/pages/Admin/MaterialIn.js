@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import {  projectFirestore} from "../../firebase/config"
 import { useFirestore } from '../../hooks/useFirestore'
 import { useHistory } from 'react-router-dom'
+import { projectAuth} from "../../firebase/config"
+import { useLog } from '../../hooks/useLog'
 import './MaterialIn.css'
 
 export default function MaterialIn() {
@@ -19,6 +21,8 @@ export default function MaterialIn() {
   const [info,setInfo] = useState([])
   const [docId, setDocId]=useState([])
   const updateMaterial= projectFirestore.collection('materiallist')
+  const {logging}= useLog()
+  const { uid } = projectAuth.currentUser
 
   useEffect(()=>{
     projectFirestore.collection('materiallist')
@@ -67,6 +71,7 @@ export default function MaterialIn() {
         })})*/
      console.log(updateVolumen)
      console.log(updateVolumen)
+     logging(uid, new Date(), "anyag betárolása")
      history.push('/admin')
 
   }

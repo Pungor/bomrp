@@ -29,13 +29,13 @@ export const useLogin = () => {
         setIsPending(false)
         setError(null)
       }
-    //  logging(userId, new Date(), "bejelentkezés")
+      logging(userId, new Date(), "bejelentkezés")
     } 
     catch(err) {
       if (!isCancelled) {
         setError(err.message)
         setIsPending(false)
-       // logging(userId, new Date(), "sikertelen bejelentkezés")
+        logging(userId, new Date(), "sikertelen bejelentkezés")
       }
     }
   }

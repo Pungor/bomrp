@@ -1,7 +1,8 @@
 import { useState, useEffect} from 'react'
 import { useHistory } from 'react-router-dom'
 import { useFirestore } from '../../hooks/useFirestore'
-import {  projectFirestore} from "../../firebase/config"
+import {  projectFirestore, projectAuth} from "../../firebase/config"
+import { useLog } from '../../hooks/useLog'
 
 // styles
 import './CreateBom.css'
@@ -14,10 +15,11 @@ export default function CreateBom() {
   const [volumen, setVolumen] = useState('')
   const [newMaterial, setNewMaterial] = useState('')
   const [info,setInfo] = useState([])
+  const {logging}= useLog()
  
   const { addDocument } = useFirestore('bom')
   const history = useHistory()
-
+  const { uid } = projectAuth.currentUser
 
   useEffect(()=>{
     projectFirestore.collection('materiallist')
@@ -41,6 +43,7 @@ export default function CreateBom() {
         note:method,
 
     })
+    logging(uid, new Date(), "bom létrehozva")
     history.push('/admin')
     setMaterials("")
   }

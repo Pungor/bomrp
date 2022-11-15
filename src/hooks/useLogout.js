@@ -31,13 +31,13 @@ export const useLogout = () => {
         setIsPending(false)
         setError(null)
       } 
-    // logging(uid, new Date(), "kijelentkezés")
+     logging(uid, new Date(), "kijelentkezés")
     } 
     catch(err) {
       if (!isCancelled) {
         setError(err.message)
         setIsPending(false)
-     //  logging(uid , new Date(), "sikertelen kijelentkezés")
+       logging(uid , new Date(), "sikertelen kijelentkezés")
       }
     }
   }

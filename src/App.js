@@ -1,6 +1,9 @@
 import './App.css'
+//import { useState, useEffect} from 'react'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext'
+//import {  projectFirestore} from "./firebase/config"
+
 
 import Login from './pages/Login/Login'
 import Signup from './pages/Admin/Signup'
@@ -23,14 +26,30 @@ import MaterialOrder from './pages/Admin/MaterialOrder'
 import Logging from './pages/Admin/Logging'
 import Collegaue from './pages/Admin/Collegaue'
 import CollageueData from './pages/Admin/CollageueData'
+import MaterialUsed from './pages/MaterialUsed/MaterialUsed'
 
 
 function App() {
 
   const {user, authIsReady} = useAuthContext()
+  /*const [info,setInfo] = useState([])
+
+  
+  useEffect(()=>{
+   projectFirestore.collection('users')
+     .get().then((querySnapshot)=>{
+       querySnapshot.forEach(element=>{
+         var data = element.data();
+         setInfo(arr => [...arr , data])
+        
+         })
+       
+     })
+   
+ }, [])*/
 
   return (
-    <div className="App">
+    <div className="App" >
 
       {authIsReady && ( <BrowserRouter> 
         {user && <Sidebar />}
@@ -69,7 +88,11 @@ function App() {
               <Route path="/kimenőanyag">
                  {!user && <Redirect to="/bejelentkezés" /> }
                  {user && <MaterialOut /> }
-              </Route>              
+              </Route>    
+              <Route path="/kikönyvelt">
+                 {!user && <Redirect to="/bejelentkezés" /> }
+                 {user && <MaterialUsed /> }
+              </Route> 
 
               <Route path="/segédletupload">
                  {!user && <Redirect to="/bejelentkezés" /> }

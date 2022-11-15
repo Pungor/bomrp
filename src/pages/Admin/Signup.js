@@ -9,6 +9,7 @@ export default function Signup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [displayName, setDisplayName] = useState('')
+  const [chooseUser, setChooseUser] = useState('')
   const [thumbnail, setThumbnail] = useState(null)
   const [thumbnailError, setThumbnailError] = useState(null)
   const { signup, isPending, error } = useSignup()
@@ -16,7 +17,8 @@ export default function Signup() {
   
   const handleSubmit = (e) => {
     e.preventDefault()
-    signup(email, password, displayName, thumbnail)
+    signup(email, password, chooseUser, displayName, thumbnail)
+    
     history.push('/admin')
   }
 
@@ -75,6 +77,18 @@ export default function Signup() {
           value={displayName}
         />
       </label>
+      <label>
+          <span>szerepkör</span>
+          <div >
+            <select id='chooseUser' onChange={(e)=>setChooseUser(e.target.value)}>    
+              <option defaultValue={"-"}>-</option>  
+              <option value="admin">Admin</option> 
+              <option value="vezető">Vezető</option> 
+              <option value="szerelő">Szerelő</option> 
+              <option value="koordinátor">Koordinátor</option> 
+              </select>
+           </div>
+        </label>
       <label>
         <span>Fénykép hozzáadása</span>
         <input 

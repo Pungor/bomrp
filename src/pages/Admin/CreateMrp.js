@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import {  projectFirestore} from "../../firebase/config"
 import { useHistory } from 'react-router-dom'
+import { projectAuth} from "../../firebase/config"
+import { useLog } from '../../hooks/useLog'
 import './CreateMrp.css'
 
 export default function CreateMrp() {
@@ -16,6 +18,8 @@ export default function CreateMrp() {
   const [maximum,setMaximum] = useState('')
   const [reorder,setReorder] = useState('')
   const [orderQuantity,setOrderQuantity] = useState('')
+  const {logging}= useLog()
+  const { uid } = projectAuth.currentUser
 
   let phMin=()=>{
     for(var i=0;i<info.length;i++){
@@ -91,6 +95,7 @@ export default function CreateMrp() {
 
     }
   }
+  logging(uid, new Date(), "mrp szint beállítása")
     history.push('/admin')
 
 

@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useFirestore } from '../../hooks/useFirestore'
-
+import { projectAuth} from "../../firebase/config"
+import { useLog } from '../../hooks/useLog'
 
 
 import './CreateMaterial.css'
@@ -16,7 +17,8 @@ export default function CreateMaterial() {
   const [volType, setVolType] = useState('')
   const inventoryCode='0101'
   const volumen=0
-
+  const {logging}= useLog()
+  const { uid } = projectAuth.currentUser
 
   const {addDocument} = useFirestore('materiallist')
 
@@ -45,8 +47,9 @@ export default function CreateMaterial() {
       setMaterialId('')
       setMaterialName('')
       setVolType('')
+      
+      logging(uid, new Date(), "új anyag létrehozva")
       history.push('/admin')
-
   }
 
 
