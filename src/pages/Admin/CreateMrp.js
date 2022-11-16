@@ -19,7 +19,7 @@ export default function CreateMrp() {
   const [reorder,setReorder] = useState('')
   const [orderQuantity,setOrderQuantity] = useState('')
   const {logging}= useLog()
-  const { uid } = projectAuth.currentUser
+ 
 
   let phMin=()=>{
     for(var i=0;i<info.length;i++){
@@ -75,6 +75,7 @@ export default function CreateMrp() {
     
   }, [])
   const handleSubmit = (e) => {
+
     e.preventDefault()
 
     for(var i=0;i<info.length;i++){
@@ -95,13 +96,15 @@ export default function CreateMrp() {
 
     }
   }
-  logging(uid, new Date(), "mrp szint beállítása")
+  logging(projectAuth.currentUser.email, new Date(), "mrp szint beállítása")
     history.push('/admin')
 
+    }
+  
 
-  }
 
-  return (
+
+    return (
     <div className="create">
       <h2 className="page-title">MRP szintek beállítása</h2>
       <form onSubmit={handleSubmit}>
@@ -123,6 +126,7 @@ export default function CreateMrp() {
           onChange={(e) => setMinimum(e.target.value)}
           value={minimum}
           placeholder={phMin()}
+          required
 
           
         />
@@ -134,7 +138,7 @@ export default function CreateMrp() {
           onChange={(e) => setMaximum(e.target.value)}
           value={maximum}
           placeholder={phMax()}
-          
+          required
         />
         </label>
         <label>
@@ -144,7 +148,7 @@ export default function CreateMrp() {
           onChange={(e) => setReorder(e.target.value)}
           value={reorder}
           placeholder={phReorder()}
-          
+          required
         />
         </label>
         <label>
@@ -154,7 +158,7 @@ export default function CreateMrp() {
           onChange={(e) => setOrderQuantity(e.target.value)}
           value={orderQuantity}
           placeholder={phOrderQuantity()}
-          
+          required
         />
         </label>
         <button className="btn">Módosít</button>

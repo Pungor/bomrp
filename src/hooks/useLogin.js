@@ -21,7 +21,7 @@ export const useLogin = () => {
       // update online status
       const documentRef = projectFirestore.collection('users').doc(res.user.uid)
       await documentRef.update({ online: true })
-      userId=res.user.uid
+      userId=res.user.email
       // dispatch login action
       dispatch({ type: 'LOGIN', payload: res.user })
 

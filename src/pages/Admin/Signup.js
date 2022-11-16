@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useSignup } from '../../hooks/useSignup'
 import { useHistory } from 'react-router-dom'
+import { projectAuth} from "../../firebase/config"
 
 // styles
 import './Signup.css'
@@ -14,6 +15,21 @@ export default function Signup() {
   const [thumbnailError, setThumbnailError] = useState(null)
   const { signup, isPending, error } = useSignup()
   const history = useHistory()
+
+  let permission=false
+ 
+  if(projectAuth.currentUser.email==="admin@gmail.com"){
+     permission=true
+  }else if(projectAuth.currentUser.email==="zoltan.pungor@gmail.com"){
+    permission=true
+  }
+  
+  if(!permission){
+    // logging(projectAuth.currentUser.email, new Date(), "oldal megtekintéséhez nincs jog") 
+     history.push('/admin')
+    
+   }
+   
   
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -48,7 +64,7 @@ export default function Signup() {
 
   return (
     <form onSubmit={handleSubmit} className="auth-form">
-      <h2>Kolléga regisztrációja</h2>
+      <h2>Kollégák jogosultságainak beállítása</h2>
       <label>
         <span>email:</span>
         <input
@@ -98,7 +114,7 @@ export default function Signup() {
         />
         {thumbnailError && <div className="error">{thumbnailError}</div>}
       </label>
-      {!isPending && <button className="btn">Regisztráció</button>}
+      {!isPending && <button className="btn">Indít</button>}
       {isPending && <button className="btn" disabled>Folyamatban</button>}
       {error && <div className="error">{error}</div>}
     </form>

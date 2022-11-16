@@ -18,11 +18,24 @@ export default function Collegaue() {
   const [born, setBorn] = useState('')
  // const [materials, setMaterials] = useState([])
   const {logging}= useLog()
-  const { uid } = projectAuth.currentUser
+
   const {addDocument} = useFirestore('collageues')
   const [info,setInfo] = useState([])
   const history = useHistory()
 
+  let permission=false
+ 
+  if(projectAuth.currentUser.email==="admin@gmail.com"){
+     permission=true
+  }else if(projectAuth.currentUser.email==="zoltan.pungor@gmail.com"){
+    permission=true
+  }
+  
+    if(!permission){
+     // logging(projectAuth.currentUser.email, new Date(), "oldal megtekintéséhez nincs jog") 
+      history.push('/admin')
+
+    }
  
   const handleSubmit = async(e) => {
     e.preventDefault()
@@ -47,7 +60,7 @@ export default function Collegaue() {
       setSkills('')
       setFam('')
       setBorn('')
-      logging(uid, new Date(), "kollégák nyilvántartása")
+      logging(projectAuth.currentUser.email, new Date(), "kolléga adatainak megadása")
       history.push('/admin')
 
   }

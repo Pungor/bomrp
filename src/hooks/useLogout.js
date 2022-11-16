@@ -19,7 +19,7 @@ export const useLogout = () => {
       // update online status
      
       await projectFirestore.collection('users').doc(uid).update({ online: false })
-
+      logging(projectAuth.currentUser.email, new Date(), "kijelentkezés")
       // sign the user out
       await projectAuth.signOut()
       
@@ -31,13 +31,13 @@ export const useLogout = () => {
         setIsPending(false)
         setError(null)
       } 
-     logging(uid, new Date(), "kijelentkezés")
+
     } 
     catch(err) {
       if (!isCancelled) {
         setError(err.message)
         setIsPending(false)
-       logging(uid , new Date(), "sikertelen kijelentkezés")
+       logging(projectAuth.currentUser.email , new Date(), "sikertelen kijelentkezés")
       }
     }
   }

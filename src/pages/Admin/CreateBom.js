@@ -19,7 +19,7 @@ export default function CreateBom() {
  
   const { addDocument } = useFirestore('bom')
   const history = useHistory()
-  const { uid } = projectAuth.currentUser
+  //const { uid } = projectAuth.currentUser
 
   useEffect(()=>{
     projectFirestore.collection('materiallist')
@@ -43,7 +43,7 @@ export default function CreateBom() {
         note:method,
 
     })
-    logging(uid, new Date(), "bom létrehozva")
+    logging(projectAuth.currentUser.email, new Date(), "bom létrehozva")
     history.push('/admin')
     setMaterials("")
   }

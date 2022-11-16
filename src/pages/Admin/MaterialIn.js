@@ -22,7 +22,7 @@ export default function MaterialIn() {
   const [docId, setDocId]=useState([])
   const updateMaterial= projectFirestore.collection('materiallist')
   const {logging}= useLog()
-  const { uid } = projectAuth.currentUser
+  //const { uid } = projectAuth.currentUser
 
   useEffect(()=>{
     projectFirestore.collection('materiallist')
@@ -71,7 +71,7 @@ export default function MaterialIn() {
         })})*/
      console.log(updateVolumen)
      console.log(updateVolumen)
-     logging(uid, new Date(), "anyag betárolása")
+     logging(projectAuth.currentUser.email, new Date(), "anyag betárolása")
      history.push('/admin')
 
   }

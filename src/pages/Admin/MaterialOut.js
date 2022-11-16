@@ -26,7 +26,7 @@ export default function MaterialOut() {
   const {addDocument} = useFirestore('materialUsed')
   const { user } = useAuthContext()
   const {logging}= useLog()
-  const { uid } = projectAuth.currentUser
+  //const { uid } = projectAuth.currentUser
 
   const handleSubmit = async(e) => {
     e.preventDefault()
@@ -58,7 +58,7 @@ export default function MaterialOut() {
      }
     
    }
-   logging(uid, new Date(), "anyagfelhasználás könyvelése")
+   logging(projectAuth.currentUser.email, new Date(), "anyagfelhasználás könyvelése")
    history.push('/admin')
 }
   useEffect(()=>{

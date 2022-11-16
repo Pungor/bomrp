@@ -18,7 +18,7 @@ export default function CreateMaterial() {
   const inventoryCode='0101'
   const volumen=0
   const {logging}= useLog()
-  const { uid } = projectAuth.currentUser
+  //const { uid } = projectAuth.currentUser
 
   const {addDocument} = useFirestore('materiallist')
 
@@ -48,7 +48,7 @@ export default function CreateMaterial() {
       setMaterialName('')
       setVolType('')
       
-      logging(uid, new Date(), "új anyag létrehozva")
+      logging(projectAuth.currentUser.email, new Date(), "új anyag létrehozva")
       history.push('/admin')
   }
 

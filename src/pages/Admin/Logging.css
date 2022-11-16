@@ -8,14 +8,14 @@ table {
   }
 
   thead th:nth-child(1) {
-    width: 40%;
+    width: 30%;
   }
   
   thead th:nth-child(2) {
-    width: 10%;
+    width: 30%;
   }
   thead th:nth-child(3) {
-    width: 50%;
+    width: 40%;
   }
 
   tbody td {
@@ -32,11 +32,17 @@ table {
   tbody tr:nth-child(even) {
     background-color: var(--text-color);
   }*/
-  caption{
+   .logging caption{
     font-size: larger;
     font-weight: bold;
     color: rgb(228, 19, 19);
+    position: -webkit-sticky;
+    position: sticky;
+    top: 100 px;
+  }
+  .logging .header{
     position: -webkit-sticky; 
     position: sticky;
-    top: 0;
+    top: 100 px;
+
   }

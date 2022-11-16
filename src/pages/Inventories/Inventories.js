@@ -27,7 +27,7 @@ export default function Inventories() {
    
       <table  key={info.id}>
         <caption>Raktárkészlet lista </caption>
-        <thead>
+        <thead className="header">
           <tr>
            <th>Raktárhely kódja</th>
             <th>Anyag kódja</th>

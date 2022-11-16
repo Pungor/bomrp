@@ -40,7 +40,8 @@ export const useSignup = () => {
         chooseUser:chooseUser,
       
       })
-      userId =res.user.uid
+      userId=res.user.email
+      //userId =res.user.uid
       // dispatch login action
       dispatch({ type: 'LOGIN', payload: res.user })
 

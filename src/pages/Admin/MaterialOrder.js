@@ -19,7 +19,7 @@ export default function MaterialOrder() {
   const { user } = useAuthContext()
   const updateMaterial= projectFirestore.collection('materiallist')
   const {logging}= useLog()
-  const { uid } = projectAuth.currentUser
+  //const { uid } = projectAuth.currentUser
 
   let tempVolumen=0
   let tempMaterial=0
@@ -95,11 +95,11 @@ const handleClick=()=>{
     }
    
   })
-  logging(uid, new Date(), "rendelés feladása")
+  logging(projectAuth.currentUser.email, new Date(), "rendelés feladása")
   history.push('/feladottrendelések')
 }
 const orders=()=>{
-  //logging(uid, new Date(), "rendelések lekérdezése")
+  //logging(projectAuth.currentUser.email, new Date(), "rendelések lekérdezése")
   history.push('/feladottrendelések')
 
 }
