@@ -12,15 +12,10 @@ export default function Chat({ project }) {
   const [info , setInfo] = useState([]);
 
 
- /* const indexing=()=>{
-    let index=0
-    for(var i=0;i<info.length;i++){
-      if(info[i].id===index){
-        index++
-      }
+  const indexing=(a, b)=>{
+    return b.id - a.id;
   }
-  return index
-}*/
+
 
   useEffect(()=>{
     projectFirestore.collection('messages')
@@ -70,7 +65,7 @@ export default function Chat({ project }) {
             <br/>
             <h4>Üzenetek ({info.length})</h4>
             <ul>
-              {info.map(info => (
+              {info.sort(indexing).map(info => (
               
                 <li key={info.id}>
                   <div className="comment-author">
