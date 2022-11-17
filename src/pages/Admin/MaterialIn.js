@@ -20,6 +20,7 @@ export default function MaterialIn() {
 
   const [info,setInfo] = useState([])
   const [docId, setDocId]=useState([])
+  const [materialInLogging, setMaterialInLogging]=useState([])
   const updateMaterial= projectFirestore.collection('materiallist')
   const {logging}= useLog()
   //const { uid } = projectAuth.currentUser
@@ -36,6 +37,16 @@ export default function MaterialIn() {
           })
         
       })
+    
+        projectFirestore.collection('logging')
+          .get().then((querySnapshot)=>{
+            querySnapshot.forEach(element=>{
+              var data = element.data();
+              setMaterialInLogging(arr => [...arr , data])
+             
+              })
+            
+          })
     
   }, [])
   console.log(info)
@@ -71,7 +82,8 @@ export default function MaterialIn() {
         })})*/
      console.log(updateVolumen)
      console.log(updateVolumen)
-     logging(projectAuth.currentUser.email, new Date(), "anyag betárolása")
+     
+     logging(projectAuth.currentUser.email, new Date(), "anyag betárolása", materialInLogging.length)
      history.push('/admin')
 
   }

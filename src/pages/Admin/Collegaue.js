@@ -21,6 +21,7 @@ export default function Collegaue() {
 
   const {addDocument} = useFirestore('collageues')
   const [info,setInfo] = useState([])
+  const [collageueId,setCollageueId] = useState([])
   const history = useHistory()
 
   let permission=false
@@ -60,7 +61,7 @@ export default function Collegaue() {
       setSkills('')
       setFam('')
       setBorn('')
-      logging(projectAuth.currentUser.email, new Date(), "kolléga adatainak megadása")
+      logging(projectAuth.currentUser.email, new Date(), "kolléga adatainak megadása", collageueId.length)
       history.push('/admin')
 
   }
@@ -79,7 +80,15 @@ useEffect(()=>{
         })
       
     })
-
+    projectFirestore.collection('logging')
+    .get().then((querySnapshot)=>{
+      querySnapshot.forEach(element=>{
+        var data = element.data();
+        setCollageueId(arr => [...arr , data])
+       
+        })
+      
+    })
   
 }, [])
 

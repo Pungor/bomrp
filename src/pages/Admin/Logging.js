@@ -9,6 +9,11 @@ export default function Logging() {
   const [info , setInfo] = useState([]);
   const history = useHistory()
 
+  const indexing=(a, b)=>{
+    return b.logId - a.logId;
+  }
+
+
   useEffect(()=>{
     projectFirestore.collection('logging')
       .get().then((querySnapshot)=>{
@@ -49,7 +54,7 @@ if(!permission){
                 </tr>
               </thead>
               
-              {info.map(info => (
+              {info.sort(indexing).map(info => (
               <tbody>
                 <tr>
                   <td >{info.userId}</td>

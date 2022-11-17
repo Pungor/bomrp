@@ -10,6 +10,7 @@ export default function CreateMrp() {
   window.scrollTo(0, 0)
   const [info,setInfo] = useState([])
   const [docId, setDocId]=useState([])
+  const [mrpLoggingId, setMrpLoggingId]=useState([])
   const history = useHistory()
   const updateMaterial= projectFirestore.collection('materiallist')
   
@@ -72,7 +73,15 @@ export default function CreateMrp() {
           })
         
       })
-    
+      projectFirestore.collection('logging')
+      .get().then((querySnapshot)=>{
+        querySnapshot.forEach(element=>{
+          var data = element.data();
+          setMrpLoggingId(arr => [...arr , data])
+         
+          })
+        
+      })
   }, [])
   const handleSubmit = (e) => {
 
@@ -96,7 +105,7 @@ export default function CreateMrp() {
 
     }
   }
-  logging(projectAuth.currentUser.email, new Date(), "mrp szint beállítása")
+  logging(projectAuth.currentUser.email, new Date(), "mrp szint beállítása", mrpLoggingId.length)
     history.push('/admin')
 
     }

@@ -5,7 +5,11 @@ import './MaterialUsed.css'
 export default function MaterialUsed() {
   window.scrollTo(0, 0)
   const [info , setInfo] = useState([]);
-
+  
+  const indexing=(a, b)=>{
+    return b.usedId - a.usedId;
+  }
+  
   useEffect(()=>{
     projectFirestore.collection('materialUsed')
       .get().then((querySnapshot)=>{
@@ -38,7 +42,7 @@ console.log(info)
         </tr>
       </thead>
       
-      {info.map(info => (
+      {info.sort(indexing).map(info => (
       <tbody key={info}>
         <tr>
           <td>{info.usedMaterial}</td>

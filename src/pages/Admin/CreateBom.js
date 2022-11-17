@@ -15,6 +15,7 @@ export default function CreateBom() {
   const [volumen, setVolumen] = useState('')
   const [newMaterial, setNewMaterial] = useState('')
   const [info,setInfo] = useState([])
+  const [bomLoggingId,setBomLoggingId] = useState([])
   const {logging}= useLog()
  
   const { addDocument } = useFirestore('bom')
@@ -31,6 +32,15 @@ export default function CreateBom() {
           })
         
       })
+      projectFirestore.collection('logging')
+      .get().then((querySnapshot)=>{
+        querySnapshot.forEach(element=>{
+          var data = element.data();
+          setBomLoggingId(arr => [...arr , data])
+         
+          })
+        
+      })
     
   }, [])
   
@@ -43,7 +53,7 @@ export default function CreateBom() {
         note:method,
 
     })
-    logging(projectAuth.currentUser.email, new Date(), "bom létrehozva")
+    logging(projectAuth.currentUser.email, new Date(), "bom létrehozva", bomLoggingId.length)
     history.push('/admin')
     setMaterials("")
   }

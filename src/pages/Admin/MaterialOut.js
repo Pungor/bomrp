@@ -23,10 +23,14 @@ export default function MaterialOut() {
  // const updateCollMaterial= projectFirestore.collection('collageues')
   const [orderError, setOrderError] = useState("")
   const [goal, setGoal] = useState("")
+  const [used, setUsed] = useState("")
+  const [materialOutLoggingId, setMaterialOutLoggingId] = useState("")
   const {addDocument} = useFirestore('materialUsed')
   const { user } = useAuthContext()
   const {logging}= useLog()
   //const { uid } = projectAuth.currentUser
+
+
 
   const handleSubmit = async(e) => {
     e.preventDefault()
@@ -46,6 +50,7 @@ export default function MaterialOut() {
             usedInventory:code,
             usedDate:new Date().toDateString(),
             usedOperator: user.displayName,
+            usedId: used.length+1, 
         
           })
           
@@ -58,7 +63,7 @@ export default function MaterialOut() {
      }
     
    }
-   logging(projectAuth.currentUser.email, new Date(), "anyagfelhasználás könyvelése")
+   logging(projectAuth.currentUser.email, new Date(), "anyagfelhasználás könyvelése", materialOutLoggingId.length)
    history.push('/admin')
 }
   useEffect(()=>{
@@ -82,6 +87,26 @@ export default function MaterialOut() {
           setCollId(arr2 => [...arr2 , coll])
 
         
+          })
+        
+      })
+      projectFirestore.collection('materialUsed')
+      .get().then((querySnapshot)=>{
+        querySnapshot.forEach(collElement=>{
+          var data = collElement.data();
+          setUsed(arr => [...arr , data])
+
+
+        
+          })
+        
+      })
+      projectFirestore.collection('logging')
+      .get().then((querySnapshot)=>{
+        querySnapshot.forEach(element=>{
+          var data = element.data();
+          setMaterialOutLoggingId(arr => [...arr , data])
+         
           })
         
       })

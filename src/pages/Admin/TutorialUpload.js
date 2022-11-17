@@ -1,15 +1,16 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { projectStorage, projectFirestore} from "../../firebase/config"
-import { projectAuth} from "../../firebase/config"
-import { useLog } from '../../hooks/useLog'
+//import { projectAuth} from "../../firebase/config"
+//import { useLog } from '../../hooks/useLog'
 import './TutorialUpload.css'
 
 export default function TutorialUpload() {
 
   const [errorMessage, setErrorMessage] = useState(null)
   const[tutorial, setTutorial]=useState(null)
-  const {logging}= useLog()
+  //const[uploadLoggingId, setUploadLoggingId]=useState(null)
+  //const {logging}= useLog()
   //const { uid } = projectAuth.currentUser
   const history = useHistory()
 
@@ -27,11 +28,12 @@ export default function TutorialUpload() {
     // window.location.reload(false)
 
     setTutorial(null)
-    logging(projectAuth.currentUser.email, new Date(), "segédanyag feltöltése")
+    //logging(projectAuth.currentUser.email, new Date(), "segédanyag feltöltése", uploadLoggingId.length)
      history.push('/admin')
  
   }
 
+  
 
   const handleFileChange = (e) => {
     setErrorMessage(null)
@@ -58,7 +60,19 @@ export default function TutorialUpload() {
   
    
   }
-
+  /*
+  useEffect(()=>{
+    projectFirestore.collection('logging')
+      .get().then((querySnapshot)=>{
+        querySnapshot.forEach(element=>{
+          var data = element.data();
+          setUploadLoggingId(arr => [...arr , data])
+         
+          })
+        
+      })
+     
+  }, [])*/
   return (
     <div className="tuts">
       <h2 className="page-title">Segédletek, információk feltöltése</h2>

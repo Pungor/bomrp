@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
 import { projectAuth, projectFirestore } from '../firebase/config'
 import { useAuthContext } from './useAuthContext'
-import { useLog } from './useLog'
+//import { useLog } from './useLog'
 
 export const useLogout = () => {
   const [isCancelled, setIsCancelled] = useState(false)
   const [error, setError] = useState(null)
   const [isPending, setIsPending] = useState(false)
   const { dispatch } = useAuthContext()
-  const {logging}= useLog()
- 
-  
+ // const {logging}= useLog()
+
+
+
   const logout = async () => {
     setError(null)
     setIsPending(true)
@@ -19,7 +20,7 @@ export const useLogout = () => {
       // update online status
      
       await projectFirestore.collection('users').doc(uid).update({ online: false })
-      logging(projectAuth.currentUser.email, new Date(), "kijelentkezés")
+      //logging(projectAuth.currentUser.email, new Date(), "kijelentkezés")
       // sign the user out
       await projectAuth.signOut()
       
@@ -37,14 +38,16 @@ export const useLogout = () => {
       if (!isCancelled) {
         setError(err.message)
         setIsPending(false)
-       logging(projectAuth.currentUser.email , new Date(), "sikertelen kijelentkezés")
+      // logging(projectAuth.currentUser.email , new Date(), "sikertelen kijelentkezés")
       }
     }
   }
-
+  
   useEffect(() => {
+
     return () => setIsCancelled(true)
   }, [])
+
 
   return { logout, error, isPending }
 }

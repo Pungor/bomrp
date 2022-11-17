@@ -11,8 +11,9 @@ export default function MaterialOrder() {
 
   window.scrollTo(0, 0)
   const [info , setInfo] = useState([])
-
+  const [orderMat, setOrderMat]=useState([])
   const [docId, setDocId]=useState([])
+  const [orderLoggingId, setOrderLoggingId]=useState([])
   const { addDocument } = useFirestore('order')
   const history = useHistory()
   const [active, setActive] = useState(false);
@@ -69,7 +70,25 @@ export default function MaterialOrder() {
           })
         
       })
-
+      projectFirestore.collection('order')
+      .get().then((querySnapshot)=>{
+        querySnapshot.forEach(element=>{
+          var data = element.data();
+          setOrderMat(arr => [...arr , data])
+ 
+          })
+        
+      })
+      projectFirestore.collection('logging')
+      .get().then((querySnapshot)=>{
+        querySnapshot.forEach(element=>{
+          var data = element.data();
+          setOrderLoggingId(arr => [...arr , data])
+         
+          })
+        
+      })
+     
   }, [])
 
 tdVolumen()
@@ -87,6 +106,7 @@ const handleClick=()=>{
         tempDate:new Date().toDateString(),
         tempStatus:'rendelve',
         tempUser:user.displayName,
+        orderId:orderMat.length+1
       })
       updateMaterial.doc(docId[element.tempDocId]).update({
         orderedVolumen:parseInt(element.tempVolumen),
@@ -95,7 +115,7 @@ const handleClick=()=>{
     }
    
   })
-  logging(projectAuth.currentUser.email, new Date(), "rendelés feladása")
+  logging(projectAuth.currentUser.email, new Date(), "rendelés feladása", orderLoggingId.length)
   history.push('/feladottrendelések')
 }
 const orders=()=>{

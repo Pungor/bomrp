@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useFirestore } from '../../hooks/useFirestore'
-import { projectAuth} from "../../firebase/config"
+import { projectAuth, projectFirestore} from "../../firebase/config"
 import { useLog } from '../../hooks/useLog'
 
 
@@ -21,10 +21,22 @@ export default function CreateMaterial() {
   //const { uid } = projectAuth.currentUser
 
   const {addDocument} = useFirestore('materiallist')
-
+  const [createLoggingId , setCreateLoggingId] = useState([]);
   const history = useHistory()
 
-  
+  useEffect(()=>{
+    projectFirestore.collection('logging')
+      .get().then((querySnapshot)=>{
+        querySnapshot.forEach(element=>{
+          var data = element.data();
+          setCreateLoggingId(arr => [...arr , data])
+         
+          })
+        
+      })
+     
+  }, [])
+
   const handleSubmit = async(e) => {
     e.preventDefault()
 
@@ -48,7 +60,7 @@ export default function CreateMaterial() {
       setMaterialName('')
       setVolType('')
       
-      logging(projectAuth.currentUser.email, new Date(), "új anyag létrehozva")
+      logging(projectAuth.currentUser.email, new Date(), "új anyag létrehozva", createLoggingId.length)
       history.push('/admin')
   }
 

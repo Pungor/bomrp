@@ -5,6 +5,10 @@ import './OrderedMaterial.css'
 export default function OrderedMaterial() {
 
     const [infoOrder , setInfoOrder] = useState([])
+    const indexing=(a, b)=>{
+      return b.orderId - a.orderId;
+    }
+  
 
     useEffect(()=>{
 
@@ -38,7 +42,7 @@ export default function OrderedMaterial() {
         </tr>
       </thead>
       
-      {infoOrder.map(element => (
+      {infoOrder.sort(indexing).map(element => (
       <tbody >
         <tr key={element}>
           <td >{element.tempMaterialId}</td>
